@@ -1,0 +1,23 @@
+services:
+  api-cinema-challenge:
+    image: ${DOCKER_REGISTRY-}apicinemachallenge
+    build:
+      context: .
+      dockerfile: api-cinema-challenge/Dockerfile
+    ports:
+      - "5000:80" # map container port 80 to local port 5000
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=ep-quiet-paper-abuxfy9e-pooler.eu-west-2.aws.neon.tech;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Database=${POSTGRES_DB}
+    # depends_on:
+    #   - db
+
+  # db:
+  #   image: postgres:15
+  #   container_name: progresInstance
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #   ports:
+  #     - "5432:5432"
